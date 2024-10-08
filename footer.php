@@ -1,14 +1,12 @@
 <footer>
-    <nav>
-        <ul>
-            <li><a href="#">Mentions légales</a></li>
-            <li><a href="#">Vie privée</a></li>
-            <li><a href="#" id="openModal">Contact</a></li>
-        </ul>
-    </nav>
-    <p>&copy; 2024 Tous droits réservés.</p>
+    <div class="footer-content">
+        <!-- Lien vers la page "Mentions légales" -->
+        <a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Mentions légales' ) ) ); ?>">Mentions légales</a>
+
+        <!-- Lien vers la page "Vie privée" de WordPress -->
+        <a href="<?php echo esc_url( get_privacy_policy_url() ); ?>">Vie privée</a>
+
+        <!-- Mention "Tous droits réservés" -->
+        <p> Tous droits réservés </p>
+    </div>
 </footer>
-<?php wp_footer(); ?>
-<?php get_template_part('template-parts/modal-contact'); ?>
-</body>
-</html>
