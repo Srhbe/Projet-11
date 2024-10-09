@@ -11,3 +11,10 @@ function motaphoto_register_menus() {
     ));
 }
 add_action('init', 'motaphoto_register_menus');
+
+// Ajoute des termes à la taxonomie "format"
+function ajouter_terms_format() {
+    wp_insert_term('Paysage', 'format');
+    wp_insert_term('Portrait', 'format');
+}
+add_action('init', 'ajouter_terms_format');
