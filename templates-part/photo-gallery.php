@@ -17,7 +17,7 @@
             <div class="photo-item">
                 <?php if (has_post_thumbnail()) : ?>
                     <a href="<?php the_permalink(); ?>">
-                        <?php the_post_thumbnail('medium'); // Utiliser une taille d'image carrée ?>
+                        <?php the_post_thumbnail('LARGE'); // Utiliser une taille d'image carrée ?>
                     </a>
                 <?php endif; ?>
             </div>
