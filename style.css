@@ -100,3 +100,76 @@ footer::before {
     top: 0; 
     left: 0; 
 }
+
+/* hero*/
+.hero-area {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.hero-thumbnail img {
+    width: 1440px; /* S'assure que l'image prend toute la largeur */
+    height: 962px; /* Conserve les proportions de l'image */
+}
+
+.title-hero {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    color: transparent; 
+    text-align: center; 
+    font-size: 80px;
+    width: 100%;
+    -webkit-text-stroke: 1px white;
+}
+
+/* Galerie photo */
+.photo-gallery {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0; /* Pour ajouter de l'espace en haut et en bas de la galerie */
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+    gap: 20px; /* Espace entre les photos */
+    max-width: 1200px; /* Largeur maximale de la galerie */
+    width: 100%; /* Prendre toute la largeur */
+}
+
+.photo-item {
+    overflow: hidden;
+    position: relative; /* Position relative pour le cas où tu veux ajouter des éléments en position absolue plus tard */
+    width: 100%; /* S'assurer que le conteneur prend toute la largeur */
+    height: 400px; /* Définit une hauteur fixe pour le conteneur de l'image */
+}
+
+.photo-item img {
+    width: 100%; /* Prendre toute la largeur de l'élément parent */
+    height: 100%; /* Prendre toute la hauteur de l'élément parent */
+    object-fit: cover; /* Pour faire en sorte que l'image remplisse le conteneur sans déformer */
+}
+
+/* bouton*/ 
+.load-more{
+    width: 272px;
+    height: 50px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #D8D8D8; 
+    color: rgb(0, 0, 0);
+    border: none; /* Supprimer les bordures */
+    cursor: pointer; /* Changer le curseur pour indiquer qu'il est cliquable */
+    font-size: 12px; 
+    font-family: Space Mono;
+    transition: background-color 0.3s; 
+}
+
+.load-more:hover {
+    background-color: #d8d8d8bc; /* Couleur au survol */
+}
