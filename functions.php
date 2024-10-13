@@ -4,14 +4,16 @@ function motaphoto_enqueue_assets() {
     // Enqueue du fichier CSS principal
     wp_enqueue_style('main-style', get_stylesheet_uri());
 
+    wp_enqueue_script('jquery');
+
     // Enqueue du script JS principal
-    wp_enqueue_script('main-script', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('main-script', get_template_directory_uri() . '/js/scripts.js');
 
     // Enqueue du script test.js
-    wp_enqueue_script('test-script', get_template_directory_uri() . '/js/test.js', array(), null, true);
+    wp_enqueue_script('test-script', get_template_directory_uri() . '/js/test.js');
 
     // Enqueue du script pour la pagination infinie
-    wp_enqueue_script('infinite-pagination', get_template_directory_uri() . '/js/infinite-pagination.js', array('jquery'), null, true);
+    wp_enqueue_script('infinite-pagination', get_template_directory_uri() . '/js/infinite-pagination.js');
 
     // Localisation du script pour passer l'URL AJAX
     wp_localize_script('infinite-pagination', 'wp_data', array(
