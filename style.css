@@ -131,29 +131,32 @@ footer::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0; /* Pour ajouter de l'espace en haut et en bas de la galerie */
+    margin: 20px 0; 
 }
 
 .photo-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
-    gap: 20px; /* Espace entre les photos */
-    max-width: 1200px; /* Largeur maximale de la galerie */
-    width: 100%; /* Prendre toute la largeur */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+    max-width: 1200px; 
+    width: 100%; 
 }
 
 .photo-item {
     overflow: hidden;
-    position: relative; /* Position relative pour le cas où tu veux ajouter des éléments en position absolue plus tard */
-    width: 100%; /* S'assurer que le conteneur prend toute la largeur */
-    height: 400px; /* Définit une hauteur fixe pour le conteneur de l'image */
+    position: relative; 
+    width: 100%; 
+    height: 400px; 
 }
 
 .photo-item img {
-    width: 100%; /* Prendre toute la largeur de l'élément parent */
-    height: 100%; /* Prendre toute la hauteur de l'élément parent */
+    width: 100%; 
+    height: 100%; 
     object-fit: cover; /* Pour faire en sorte que l'image remplisse le conteneur sans déformer */
 }
+
+.photo-item img:hover {
+opacity: 1;}
 
 /* bouton*/ 
 .load-more{
@@ -163,13 +166,104 @@ footer::before {
     padding: 10px 20px;
     background-color: #D8D8D8; 
     color: rgb(0, 0, 0);
-    border: none; /* Supprimer les bordures */
-    cursor: pointer; /* Changer le curseur pour indiquer qu'il est cliquable */
+    border: none; 
+    cursor: pointer; /* curseur cliquable */
     font-size: 12px; 
     font-family: Space Mono;
     transition: background-color 0.3s; 
 }
 
 .load-more:hover {
-    background-color: #d8d8d8bc; /* Couleur au survol */
+    background-color: #000000bc; 
+    color: rgb(255, 255, 255);
+}
+
+
+/* modal contact */
+
+.hidden{
+    visibility: hidden; 
+    display: none !important;
+}
+
+.modal-overlay {
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0, 0, 0, 0.8);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    top:0;
+    left:0;
+    z-index: 999;
+}
+
+.modal-contact {
+    position:relative;
+    background:white;
+    max-width:600px;
+    width:80%;
+    padding:15px 0;
+    border: 5px solid #000000;
+}
+
+.modal-title {
+    background-image: url('./assets/contact.png');
+    background-repeat : repeat;
+    overflow : hidden;
+    margin-bottom: 10px;
+    width:100%;
+    height: 49px;
+}
+
+.modal-detail{    
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 5px 0 70px;
+    margin: auto;
+    max-height: 400px;
+}
+
+.wpcf7-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.wpcf7-form p {
+    margin-bottom: 0px;
+   
+}
+
+.wpcf7-form p label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.wpcf7-form p input {
+    height: 40px;
+    padding: 10px;
+}
+
+.wpcf7-form p textarea {
+    padding: 10px;
+}
+
+.wpcf7-form p .wpcf7-text,
+.wpcf7-form p .wpcf7-email,
+.wpcf7-form p textarea {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #bcbcbc;
+}
+
+
+.wpcf7-form p .wpcf7-submit {     
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 400;
+    width: 352px;
 }

@@ -25,9 +25,10 @@
                 wp_nav_menu(array(
                     'theme_location' => 'main-menu',
                     'container' => 'ul', // Supprime le conteneur div par défaut
-                    'menu_class' => 'nav-menu' // Classe personnalisée pour le menu
-                ));
+                    'menu_class' => 'nav-menu' 
+                ));//pour tester le contact
             ?>
+            <li class="modal_contact"><a href="#" class="contact">Contact</a></li> 
         </nav>
     </div>
 </header>

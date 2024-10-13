@@ -10,3 +10,9 @@
         <p> Tous droits réservés </p>
     </div>
 </footer>
+<!-- modal contact -->
+<?php 
+        get_template_part ( 'templates-part/modal-contact'); 		
+    ?>
+</body>
+</html>
