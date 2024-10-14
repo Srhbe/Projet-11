@@ -156,7 +156,78 @@ footer::before {
 }
 
 .photo-item img:hover {
-opacity: 1;}
+opacity: 0.5;}
+
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex; /* Utilise flexbox pour centrer les icônes */
+    justify-content: center; /* Centre les icônes horizontalement */
+    align-items: center; /* Centre les icônes verticalement */
+    background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    opacity: 0; /* Masque l'overlay par défaut */
+    transition: opacity 0.3s ease; /* Transition pour l'apparition */
+}
+
+/* Affiche l'overlay au survol */
+.photo-item:hover .overlay {
+    opacity: 1; 
+}
+
+/* Styles pour le contenu de l'overlay */
+
+.overlay-title, .overlay-category {
+    color: #fff; 
+    position: absolute; 
+    font-weight: 500;
+    font-family: 'Poppins';
+    text-transform: uppercase;
+}
+
+.overlay-title {
+    bottom: 10px; 
+    left: 10px; 
+}
+
+.overlay-category {
+    bottom: 10px; 
+    right: 10px; 
+}
+
+/* Ajuste la taille des icônes */
+
+.fullscreen-icon, .eye-icon {
+    position: absolute; /* Positionne les icônes dans l'overlay */
+}
+
+.fullscreen-icon {
+    top: 6px; 
+    right: 10px; 
+    width: 14px;
+    height: auto;
+}
+
+.eye-icon {
+    top: 50%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /*  centrer */
+    width: 46px;
+    height: 31px;
+}
+.fullscreen-background {
+    background-color: black; /* Fond noir uniquement pour le plein écran */
+    border-radius: 50%; /* Rendre le div rond */
+    padding: 5px; /* Ajout d'un peu d'espace autour de l'icône */
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 17px; /* Positionner en haut à droite */
+    right: 25px; /* Position à droite */
+}
 
 /* bouton*/ 
 .load-more{
