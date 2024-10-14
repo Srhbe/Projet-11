@@ -28,7 +28,6 @@
                     'menu_class' => 'nav-menu' 
                 ));//pour tester le contact
             ?>
-            <li class="modal_contact"><a href="#" class="contact">Contact</a></li> 
         </nav>
     </div>
 </header>

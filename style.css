@@ -182,7 +182,6 @@ opacity: 1;}
 /* modal contact */
 
 .hidden{
-    visibility: hidden; 
     display: none !important;
 }
 
@@ -197,6 +196,21 @@ opacity: 1;}
     top:0;
     left:0;
     z-index: 999;
+    transition: opacity 0.5s ease;
+}
+
+/* Style pour masquer complètement la modal */
+.modal-hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.5s ease;
+}
+
+/* Style pour afficher la modal */
+.modal-contact.open {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.5s ease;
 }
 
 .modal-contact {
@@ -266,4 +280,7 @@ opacity: 1;}
     font-size: 14px;
     font-weight: 400;
     width: 352px;
+}
+.input-error {
+    border: 2px solid red;
 }

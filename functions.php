@@ -9,9 +9,6 @@ function motaphoto_enqueue_assets() {
     // Enqueue du script JS principal
     wp_enqueue_script('main-script', get_template_directory_uri() . '/js/scripts.js');
 
-    // Enqueue du script test.js
-    wp_enqueue_script('test-script', get_template_directory_uri() . '/js/test.js');
-
     // Enqueue du script pour la pagination infinie
     wp_enqueue_script('infinite-pagination', get_template_directory_uri() . '/js/infinite-pagination.js');
 
@@ -46,24 +43,24 @@ add_action('after_setup_theme', 'custom_theme_setup');
 
 // Fonction pour charger plus de photos via AJAX
 function load_more_photos() {
-    // Vérification du nonce de sécurité
-    check_ajax_referer('load_more_nonce', 'nonce');
+    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
 
-    // Récupération de la page actuelle depuis la requête AJAX
-    $paged = $_POST['page'];
+    // Si la page n'est pas valide
+    if (!$paged || $paged <= 1) {
+        echo ''; 
+        wp_die();
+    }
 
-    // Arguments de la requête WP_Query
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 8,
         'paged' => $paged
     );
 
-    // Exécution de la requête
     $photo_query = new WP_Query($args);
 
-    // Boucle sur les résultats
     if ($photo_query->have_posts()) {
+        ob_start(); // Commence la mise en tampon de sortie
         while ($photo_query->have_posts()) {
             $photo_query->the_post();
             ?>
@@ -76,12 +73,15 @@ function load_more_photos() {
             </div>
             <?php
         }
+        $output = ob_get_clean(); // Récupère la sortie mise en tampon
+        echo $output; // Affiche le contenu des nouveaux éléments
     } else {
-        echo ''; // Aucune photo trouvée
+        echo ''; // Si aucune nouvelle publication trouvée
     }
 
-    wp_reset_postdata(); // Réinitialisation de la requête
-    wp_die(); // Fin de l'exécution AJAX
+    wp_reset_postdata();
+    wp_die();
 }
+
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
