@@ -1,7 +1,5 @@
-console.log('Le script infinite-pagination.js est chargé');
-// code pagination ne fonctionne pas
 jQuery(document).ready(function ($) {
-    console.log('Le script est chargé.'); // Vérifiez si le script s'exécute.
+    console.log('Le script infinite-pagination.js est chargé.');
 
     var page = 2; // La page à charger
     var loading = false; 
@@ -22,30 +20,46 @@ jQuery(document).ready(function ($) {
                 },
                 success: function (response) {
                     if (response.data && page <= response.max_num_pages) {
-                        console.log(response.max_num_pages + '<=' + page)
-                        $('.photo-grid').append(response.data); // Ajouter les nouvelles photos
-                        $loadMoreButton.text('Charger plus'); // Réinitialiser le texte
+                        console.log('Chargement page : ' + page + ' / ' + response.max_num_pages);
+                        
+                        // Ajouter les nouvelles photos à la grille
+                        $('.photo-grid').append(response.data); 
+
+                        // Réinitialiser le texte du bouton
+                        $loadMoreButton.text('Charger plus'); 
+
+                        // Si on a atteint la dernière page
                         if (page == response.max_num_pages) {
-                            $loadMoreButton.text('Fin des publications'); // Si plus de publications 
-                            $loadMoreButton.prop("disabled",true);
-                        }
-                        else {
+                            $loadMoreButton.text('Fin des publications');
+                            $loadMoreButton.prop("disabled", true); // Désactiver le bouton
+                        } else {
                             page++; // Incrémenter la page
                         }
+
+                        // Réattacher les événements de la lightbox aux nouvelles photos
+                        attachLightboxEvents();
+
                     } else {
-                        $loadMoreButton.text('Fin des publications'); // Si plus de publications
-                        $loadMoreButton.prop("disabled",true);
+                        // Si aucune nouvelle publication n'est trouvée ou toutes les pages sont chargées
+                        $loadMoreButton.text('Fin des publications');
+                        $loadMoreButton.prop("disabled", true);
                     }
+
                     loading = false; // Fin du chargement
                 },
                 error: function (xhr, status, error) {
                     console.error('Erreur AJAX:', error); // Afficher les erreurs dans la console
+                    $loadMoreButton.text('Erreur de chargement');
                     loading = false; // Fin du chargement même s'il y a une erreur
                 }
             });
         }
     });
+
+    // Initialisation des événements de la lightbox
+    attachLightboxEvents();
 });
+
 
 // modal contact
 document.addEventListener("DOMContentLoaded", function () {
@@ -71,3 +85,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+// 

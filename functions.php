@@ -19,6 +19,14 @@ function motaphoto_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_assets');
 
+function theme_enqueue_scripts() {
+    // Charger le fichier JS de la lightbox
+    wp_enqueue_script('lightbox-js', get_template_directory_uri() . '/js/lightbox.js', array('jquery'));
+}
+
+add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
+
+
 // Enregistrement du menu
 function motaphoto_register_menus() {
     register_nav_menus(array(

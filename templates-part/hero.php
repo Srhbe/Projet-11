@@ -20,7 +20,7 @@
                     
         <?php endwhile; ?>            
         
-        <h1 class="title-hero">PHOTOGRAPHE ÉVÉNEMENT</h1>
+        <h1 class="title-hero">PHOTOGRAPHE EVENT</h1>
     </div>  
 </div>
 <?php
