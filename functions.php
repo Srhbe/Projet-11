@@ -37,8 +37,8 @@ add_action('init', 'motaphoto_register_menus');
 
 // Ajout des termes à la taxonomie "format"
 function ajouter_terms_format() {
-    wp_insert_term('Paysage', 'format');
-    wp_insert_term('Portrait', 'format');
+    wp_insert_term('Paysage', 'formats');
+    wp_insert_term('Portrait', 'formats');
 }
 add_action('init', 'ajouter_terms_format');
 
@@ -153,3 +153,131 @@ function send_contact_form() {
     wp_die(); // Toujours appeler wp_die() à la fin de l'action AJAX
 }
 
+function my_enqueue_scripts() {
+    // Charger jQuery (si ce n'est pas déjà fait) et le fichier JS personnalisé
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('custom-filter', get_stylesheet_directory_uri() . '/assets/js/custom-filter.js', array('jquery'), null, true);
+
+    // Passer les données nécessaires à JavaScript via wp_localize_script
+    wp_localize_script('custom-filter', 'wp_data', array(
+        'ajax_url' => admin_url('admin-ajax.php'), // URL pour les requêtes AJAX
+    ));
+}
+add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
+//capturer les filtres
+function filter_photos() {
+    // Vérification des paramètres envoyés
+    $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+    $format = isset($_POST['format']) ? sanitize_text_field($_POST['format']) : '';
+    $order = isset($_POST['order']) ? sanitize_text_field($_POST['order']) : 'DESC'; // Trier par date descendante par défaut
+
+    // Arguments de la requête WP_Query
+    $args = array(
+        'post_type' => 'photo', // Modifier selon ton type de publication
+        'posts_per_page' => 8,
+        'order' => $order,
+        'orderby' => 'date',
+        'tax_query' => array(
+            'relation' => 'AND',
+        ),
+    );
+
+    // Ajouter le filtre de catégorie s'il est défini
+    if (!empty($category)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categories', // Taxonomie pour la catégorie
+            'field' => 'slug',
+            'terms' => $category,
+        );
+    }
+
+    // Ajouter le filtre de format s'il est défini
+    if (!empty($format)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'formats', // Taxonomie pour le format
+            'field' => 'slug',
+            'terms' => $format,
+        );
+    }
+
+    // Effectuer la requête WP_Query
+    $query = new WP_Query($args);
+
+    // Vérifier s'il y a des résultats
+    if ($query->have_posts()) {
+        ob_start();
+        while ($query->have_posts()) : $query->the_post();
+            // Ton HTML pour afficher les photos
+            // Par exemple :
+            ?>
+            <div class="photo-item">
+                <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                <div class="overlay-title"><?php the_title(); ?></div>
+                <div class="overlay-category"><?php echo get_the_term_list(get_the_ID(), 'category'); ?></div>
+            </div>
+            <?php
+        endwhile;
+        $data = ob_get_clean();
+
+        // Envoyer la réponse en JSON
+        wp_send_json_success($data);
+    } else {
+        // Si aucun résultat, renvoyer un message vide
+        wp_send_json_error('Aucune photo trouvée.');
+    }
+
+    wp_die(); // Finir proprement la requête AJAX
+}
+add_action('wp_ajax_filter_photos', 'filter_photos');
+add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
+ 
+// Fonction pour générer dynamiquement les catégories dans le filtre
+function get_categories_for_filter() {
+    // Obtenir les termes de la taxonomie 'category'
+    $categories = get_terms([
+        'taxonomy' => 'categorie',
+        'hide_empty' => true, // Ne pas afficher les catégories vides
+    ]);
+
+    if (!empty($categories) && !is_wp_error($categories)) {
+        foreach ($categories as $category) {
+            echo '<option value="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</option>';
+        }
+    } else {
+        echo '<option value="">Aucune catégorie disponible</option>';
+    }
+}
+
+function get_formats_for_filter() {
+    // Obtenir les termes de la taxonomie 'format'
+    $formats = get_terms([
+        'taxonomy' => 'format', // Assurez-vous que 'format' est le bon slug pour votre taxonomie
+        'hide_empty' => true, // Ne pas afficher les formats vides
+    ]);
+
+    if (!empty($formats) && !is_wp_error($formats)) {
+        foreach ($formats as $format) {
+            echo '<option value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</option>';
+        }
+    } else {
+        echo '<option value="">Aucun format disponible</option>';
+    }
+}
+
+
+// Récupérer les catégories ACF
+function get_acf_categories() {
+    $categories = get_field('categorie', 'option'); // 'option' si les catégories sont des champs d'options
+    return $categories;
+}
+
+// Pour passer les catégories à JavaScript
+add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
+function enqueue_my_scripts() {
+    wp_enqueue_script('my-script', get_template_directory_uri() . '/js/my-script.js', array('jquery'), '1.0', true);
+    wp_localize_script('my-script', 'wp_data', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'categories' => get_acf_categories() // Passe les catégories à JavaScript
+    ));
+} 

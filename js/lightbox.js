@@ -21,17 +21,20 @@ const attachLightboxEvents = () => {
     
     // Changez ce sélecteur pour correspondre à l'icône de votre image
     document.querySelectorAll('.fullscreen-icon').forEach((trigger, index) => {
-        const fullImage = trigger.closest('.photo-item').querySelector('img').src; // Assurez-vous que c'est la bonne source d'image
-        const ref = trigger.closest('.photo-item').querySelector('.overlay-title').innerText; // Assurez-vous que l'élément existe
-        const categorie = trigger.closest('.photo-item').querySelector('.overlay-category').innerText; // Assurez-vous que l'élément existe
-
+        const fullImage = trigger.closest('.photo-item').querySelector('img').src;
+        const ref = trigger.closest('.photo-item').querySelector('.overlay-title').innerText;
+        const categorie = trigger.closest('.photo-item').querySelector('.overlay-category').innerText;
+    
+        console.log(`Image ${index}:`, { fullImage, ref, categorie }); // Log de chaque image
+    
         images.push({ fullImage, ref, categorie });
-
+    
         trigger.addEventListener('click', (e) => {
             e.preventDefault();
             openLightbox(index);
         });
     });
+    
 
     let currentIndex = 0;
 

@@ -22,6 +22,8 @@
                             <div class="overlay-category">
                             <?php
                                 $categories = get_the_category();
+                                var_dump($categories); // Cela affichera toutes les catégories associées à la publication
+                                
                                 if (!empty($categories)) {
                                     // Récupère le nom de la première catégorie
                                     echo esc_html($categories[0]->name);
