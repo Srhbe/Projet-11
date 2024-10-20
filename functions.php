@@ -153,6 +153,9 @@ function send_contact_form() {
     wp_die(); // Toujours appeler wp_die() à la fin de l'action AJAX
 }
 
+//filtres
+
+
 function my_enqueue_scripts() {
     // Charger jQuery (si ce n'est pas déjà fait) et le fichier JS personnalisé
     wp_enqueue_script('jquery');
@@ -186,7 +189,7 @@ function filter_photos() {
     // Ajouter le filtre de catégorie s'il est défini
     if (!empty($category)) {
         $args['tax_query'][] = array(
-            'taxonomy' => 'categories', // Taxonomie pour la catégorie
+            'taxonomy' => 'categorie', // Taxonomie pour la catégorie
             'field' => 'slug',
             'terms' => $category,
         );
@@ -195,7 +198,7 @@ function filter_photos() {
     // Ajouter le filtre de format s'il est défini
     if (!empty($format)) {
         $args['tax_query'][] = array(
-            'taxonomy' => 'formats', // Taxonomie pour le format
+            'taxonomy' => 'format', // Taxonomie pour le format
             'field' => 'slug',
             'terms' => $format,
         );
