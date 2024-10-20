@@ -1,15 +1,23 @@
 <?php
 // single-photo.php
+
 get_header(); ?>
 
 <?php
 if( have_posts() ) : while( have_posts() ) : the_post(); ?>
 	<section class="photo_detail">
-		<?php get_template_part ( 'template-parts/post/photo-detail'); ?>
+		<?php get_template_part ( 'templates-part/photo-detail'); ?>
 		
 		<div class="photo__contact flexrow">
-			<p>Cette photo vous intéresse ? <button class="btn" type="button"><a href="#" class="contact">Contact</a></button></p>
-			<div class="site__navigation flexrow">				
+		<p>Cette photo vous intéresse ?  
+    <button class="btn" type="button">
+        <a href="#" class="contact" 
+           data-reference="<?php echo esc_attr(get_field('reference')); ?>">
+           Contact
+        </a>
+    </button>
+</p>
+<div class="site__navigation flexrow">				
 				<div class="site__navigation__prev">
 				<?php
 					$prev_post = get_previous_post();							
@@ -24,9 +32,9 @@ if( have_posts() ) : while( have_posts() ) : the_post(); ?>
 							<?php
 							}
 							else{
-								echo '<img src="'. get_stylesheet_directory_uri() .'/assets/img/no-image.jpeg" alt="Pas de photo" width="77px" ><br>';
+								echo '<img src="'. get_stylesheet_directory_uri() .'/assets/no-image.jpeg" alt="Pas de photo" width="77px" ><br>';
 							}							
-							echo '<img src="'. get_stylesheet_directory_uri() .'/assets/img/precedent.png" alt="Photo précédente" ></a>';
+							echo '<img src="'. get_stylesheet_directory_uri() .'/assets/precedent.png" alt="Photo précédente" ></a>';
 						}
 						?>
 				</div>
@@ -44,9 +52,9 @@ if( have_posts() ) : while( have_posts() ) : the_post(); ?>
 							<?php
 							}
 							else{
-								echo '<img src="'. get_stylesheet_directory_uri() .'/assets/img/no-image.jpeg" alt="Pas de photo" width="77px" ><br>';
+								echo '<img src="'. get_stylesheet_directory_uri() .'/assets/no-image.jpeg" alt="Pas de photo" width="77px" ><br>';
 							}							
-							echo '<img src="'. get_stylesheet_directory_uri() .'/assets/img/suivant.png" alt="Photo suivante" ></a>';
+							echo '<img src="'. get_stylesheet_directory_uri() .'/assets/suivant.png" alt="Photo suivante" ></a>';
 						}
 					?>
 					
@@ -57,7 +65,7 @@ if( have_posts() ) : while( have_posts() ) : the_post(); ?>
 			<h2>Vous aimerez aussi</h2>		
 			<div class="photo__others--images flexrow">
 				<?php 
-					get_template_part ( 'template-parts/post/photo-common');
+					get_template_part ( 'templates-part/photo-common');
 				 ?>
 			<button class="btn btn-all-photos" type="button">
 				<a href="<?php echo home_url( '/' ); ?>" aria-label="Page d'accueil de Nathalie Mota">Toutes les photos</a>
