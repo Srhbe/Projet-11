@@ -154,13 +154,7 @@ function send_contact_form() {
 }
 
 //filtres
-
-
 function my_enqueue_scripts() {
-    // Charger jQuery (si ce n'est pas déjà fait) et le fichier JS personnalisé
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('custom-filter', get_stylesheet_directory_uri() . '/assets/js/custom-filter.js', array('jquery'), null, true);
-
     // Passer les données nécessaires à JavaScript via wp_localize_script
     wp_localize_script('custom-filter', 'wp_data', array(
         'ajax_url' => admin_url('admin-ajax.php'), // URL pour les requêtes AJAX
@@ -255,8 +249,8 @@ function get_categories_for_filter() {
 function get_formats_for_filter() {
     // Obtenir les termes de la taxonomie 'format'
     $formats = get_terms([
-        'taxonomy' => 'format', // Assurez-vous que 'format' est le bon slug pour votre taxonomie
-        'hide_empty' => true, // Ne pas afficher les formats vides
+        'taxonomy' => 'format', 
+        'hide_empty' => true, 
     ]);
 
     if (!empty($formats) && !is_wp_error($formats)) {

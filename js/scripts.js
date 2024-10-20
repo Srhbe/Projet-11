@@ -1,10 +1,12 @@
- // bouton charger plus & filtres
+// bouton charger plus & filtres
+let nbrPhotoAffiche = 8; 
+let reload = true; // Flag pour savoir s'il faut vider le container avant d'afficher les nouvelles photos
 
- jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($) {
     // Quand l'utilisateur change un filtre
     $('#category-filter, #format-filter, #sort-filter').on('change', function () {
         // Réinitialiser les paramètres de pagination et de reload
-        nbrPhotoAffiche = 0; 
+        nbrPhotoAffiche = 8; 
         reload = true; 
         
         // Appeler la fonction pour charger les photos avec les filtres
@@ -48,8 +50,9 @@
                     if (response.has_more_posts) {
                         $('#load-more').show(); // Affiche le bouton si plus de photos sont disponibles
                     } else {
-                        $('#load-more').hide(); // Cache le bouton s'il n'y a plus de photos
+                        $('#load-more').text('Fin de publication').show(); // Change le texte en "Fin de publication"
                     }
+                    
                 } else {
                     // Si aucune photo n'a été trouvée
                     $('.photo-grid').html('<p>Aucune photo trouvée.</p>');
@@ -88,27 +91,3 @@
         }
     });
 });
-
-//overlay
-
-jQuery(document).ready(function ($) {
-    $('.filter-group select').on('focus', function () {
-        $(this).siblings('label').css('opacity', '0'); // Cache le label lorsque le select est focus
-    });
-
-    $('.filter-group select').on('blur', function () {
-        if ($(this).val() === "") {
-            $(this).siblings('label').css('opacity', '1'); // Montre le label si rien n'est sélectionné
-        }
-    });
-
-    // Pour maintenir le label caché si une valeur est sélectionnée
-    $('.filter-group select').on('change', function () {
-        if ($(this).val() !== "") {
-            $(this).siblings('label').css('opacity', '0'); // Cache le label
-        } else {
-            $(this).siblings('label').css('opacity', '1'); // Montre le label
-        }
-    });
-});
-
