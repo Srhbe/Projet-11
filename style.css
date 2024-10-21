@@ -129,6 +129,197 @@ footer::before {
     -webkit-text-stroke: 1px white;
 }
 
+/* Filtre */
+
+.btnFiltre {
+    display: flex;
+    max-width: 260px;
+    padding: 11px 18px;
+    margin: 0px;
+    border-radius: 8px;
+    border: 1px solid #ccc; /* Remplacez par la couleur de gris désirée */
+    background: #f9f9f9; /* Remplacez par votre couleur de fond souhaitée */
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.btnFiltre.selected {
+    border: 1px solid #007bff; /* Remplacez par la couleur désirée pour le bouton sélectionné */
+}
+
+.btnFiltre.active {
+    border-radius: 8px 8px 0 0;
+    border: 1px solid #007bff; /* Remplacez par la couleur désirée pour le bouton actif */
+}
+
+.btnFiltre .chevron {
+    background-image: url(./assets/arrow-down.png);
+    height: 20px;
+    width: 20px;
+    transition: all 0.2s;
+}
+
+.btnFiltre .chevron.active {
+    transform: rotate(180deg);
+    transition: all 0.2s;
+}
+
+.filtreItems {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.4, 1);
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    width: 100%;
+}
+
+.filtreItems.active {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0 0 8px 8px;
+    padding-top: 50px;
+    cursor: pointer;
+    max-height: 500px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.4, 1);
+}
+
+.filtreItem {
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    color: #003366; /* Remplacez par votre couleur souhaitée */
+    margin: 0;
+    height: 42px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.filtreItem:hover {
+    background: #ffcccc; /* Remplacez par votre couleur désirée au survol */
+}
+
+.filtreItem:active {
+    background: #ff9999; /* Remplacez par votre couleur désirée lors de l'activation */
+}
+
+.filtreItem.selected {
+    background: #cc0000; /* Remplacez par votre couleur désirée pour l'élément sélectionné */
+    color: white;
+}
+
+.filtreContainer {
+    display: flex;
+    width: 80%;
+    gap: 36px;
+    margin-top: 80px;
+}
+
+.filtre {
+    position: relative;
+}
+
+.flexColumn {
+    max-width: 260px;
+    width: 100%;
+}
+
+.filtreTrier {
+    margin-left: auto;
+}
+
+.filtreTrier .btnFiltre.selected {
+    text-transform: none;
+}
+
+.CatalogueContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.photo_block {
+    width: calc(50% - 10px);
+    aspect-ratio: 1.14;
+    overflow: hidden;
+}
+
+.photo_block:hover {
+    transform: scale(1.05);
+}
+
+.photo_block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.btnContainer {
+    margin: 40px 0;
+}
+
+/* Ajustements pour les sélecteurs avec flèche et étiquettes */
+.filter-area {
+    display: flex;
+    justify-content: space-between; /* Espace entre les éléments gauche et droite */
+    align-items: center; /* Aligne les filtres */
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.filter-area .filter-left {
+    display: flex;
+    gap: 20px; /* Espace entre les deux filtres */
+}
+
+.filter-area select {
+    position: relative; /* Ajout de cette propriété pour le positionnement de l'élément */
+    appearance: none; /* Supprimer l'apparence par défaut */
+    -webkit-appearance: none; /* Supprimer l'apparence par défaut pour WebKit */
+    -moz-appearance: none; /* Supprimer l'apparence par défaut pour Firefox */
+    border: 1px solid #ccc; /* Couleur de bord des sélecteurs */
+    padding: 10px 40px 10px 15px; /* Ajuster le padding pour le texte */
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    width: 100%; /* Prendre toute la largeur du conteneur */
+    background-image: url('./assets/arrow-down.png'); /* Utilisez le bon chemin */
+    background-repeat: no-repeat;
+    background-position: right 15px center; /* Positionnez l'image */
+    background-size: 10px; /* Ajustez la taille de l'image */
+}
+
+.filter-group {
+    width: 260px; /* Définit la largeur fixe pour chaque groupe de filtre */
+}
+
+/* État hover pour le conteneur */
+.filter-area select:hover {
+    border: 1px solid blue; /* Contour bleu lorsque l'on passe la souris */
+    border-radius: 8px 8px 0px 0px;
+}
+
+/* État actif lorsque le conteneur est sélectionné */
+.filter-area select.active {
+    border: 1px solid blue; /* Contour bleu lorsque le conteneur est cliqué */
+    border-radius: 8px 8px 0px 0px;
+
+}
+
+
 /* Galerie photo */
 .photo-gallery {
     width: 100%;
@@ -253,6 +444,222 @@ opacity: 0.5;}
     color: rgb(255, 255, 255);
 }
 
+/* Media Queries pour mobile avec une largeur maximale de 768px */
+@media only screen and (max-width: 768px) {
+
+    /* Header - Logo à gauche et burger menu à droite */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+    }
+
+    .hero-thumbnail img {
+        width: 100%;
+        height: 325px; 
+    }
+
+    .title-hero {
+        font-size: 28px;
+        -webkit-text-stroke: 0.6px white;
+        top: 40%;
+    }
+
+    .logo {
+        max-width: 150px; /* Taille ajustée du logo */
+    }
+
+    /* Style pour le burger menu */
+    .burger-menu {
+        display: block;
+        cursor: pointer;
+    }
+
+    .burger-menu span {
+        display: block;
+        width: 30px;
+        height: 4px;
+        background-color: #333;
+        margin: 5px 0;
+    }
+
+    /* Les filtres en ligne, l'un sous l'autre */
+    .filters {
+        display: flex;
+        flex-direction: column
+    }
+    .filter-group {
+        display: block;
+        width: 100%;
+    }
+
+    .filter-area {
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+        padding: 0px;
+        margin-bottom: 0px;
+        gap: 0px;
+    }
+    .filter-left {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+    }
+    .filter-area .filter-left {
+        display: flex;
+        gap: 0px;
+    }
+
+    .filter-group select {
+        width: 270px;
+        height: 50px;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    /* Grille des photos - 1 photo par ligne */
+    .photo-grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;    
+    }
+
+    .photo-item {
+        position: relative; /* Pour les overlays */
+        width: 100% !important; 
+        margin-bottom: 10px;
+        height: auto;
+    }
+
+    .photo-item img {
+        width: 100%; /* Images en pleine largeur */
+        height: 280px; /* Préserver les proportions */
+    }
+
+    /* Overlay sur les photos */
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 280px;
+        background: rgba(0, 0, 0, 0.6); /* Fond plus sombre */
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Affichage de l'overlay au survol */
+    .photo-item:hover .overlay {
+        opacity: 1;
+    }
+
+    .overlay-title {
+        color: white;
+        font-size: 14px;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .overlay-category {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .fullscreen-icon img,
+    .eye-icon img {
+        width: 24px;
+        height: 21px;
+    }
+
+    .fullscreen-icon {
+        top: 8px;
+        right: 21px;
+    }
+
+    .fullscreen-icon img, .eye-icon img {
+        width: 24px;
+        height: 21px;
+        position: relative;
+        right: -3px;
+    }
+    .fullscreen-background {
+        width: 31px;
+        height: 29px;
+        right: 6px;
+    }
+    /* Bouton "Charger plus" */
+    #load-more {
+        display: block;
+        width: 272px;
+        padding: 10px;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    #load-more:hover {
+        background-color: #dddddd;
+    }
+
+    /* Footer - Les éléments du footer en ligne */
+    footer {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+        background-color: #f1f1f1;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    footer div {
+        margin-bottom: 10px;
+    }
+
+    footer a {
+        color: #0073e6;
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+    /*Modal contact */
+    .modal-contact.open {
+            width: 430px;
+            height: 100%;
+        }
+    .modal-title__container {
+        margin-top: 30px;
+    }
+    .wpcf7-form p {
+        margin-bottom: 0px;
+        width: 300px;
+    }
+    .form.wpcf7-form.init {
+        display: flex;
+        align-items: center;
+    }
+}
+
 
 /* modal contact */
 
@@ -292,7 +699,8 @@ opacity: 0.5;}
     position:relative;
     background:white;
     max-width:600px;
-    width:80%;
+    height: 663px;
+    width: 597px;
     padding:15px 0;
     border: 5px solid #000000;
 }
@@ -304,25 +712,32 @@ opacity: 0.5;}
     margin-bottom: 10px;
     width:100%;
     height: 49px;
+    position:relative;
+    top: -4px;
 }
 
 .modal-detail{    
     display:flex;
     justify-content:center;
     align-items:center;
-    padding: 5px 0 70px;
+    padding: 5px 0 0px;
     margin: auto;
     max-height: 400px;
 }
 
+div#wpcf7-f5-o1 {
+    position: relative;
+    top: 20px;
+}
 .wpcf7-form {
     display: flex;
     flex-direction: column;
+    margin-top: 70px;
 }
 
 .wpcf7-form p {
     margin-bottom: 0px;
-   
+   width: 263px;
 }
 
 .wpcf7-form p label {
@@ -334,12 +749,8 @@ opacity: 0.5;}
 
 .wpcf7-form p input {
     height: 40px;
-    padding: 10px;
 }
 
-.wpcf7-form p textarea {
-    padding: 10px;
-}
 
 .wpcf7-form p .wpcf7-text,
 .wpcf7-form p .wpcf7-email,
@@ -354,7 +765,9 @@ opacity: 0.5;}
     font-family: 'Space Mono', monospace;
     font-size: 14px;
     font-weight: 400;
-    width: 352px;
+    width: 267px;
+    border: white;
+    
 }
 .input-error {
     border: 2px solid red;
@@ -518,265 +931,6 @@ opacity: 0.5;}
         font-size: 0.86rem;
     }
 }
-
-
-/*/ Filtre*/
-
-/* Filtre */
-
-.btnFiltre {
-    display: flex;
-    max-width: 260px;
-    padding: 11px 18px;
-    margin: 0px;
-    border-radius: 8px;
-    border: 1px solid #ccc; /* Remplacez par la couleur de gris désirée */
-    background: #f9f9f9; /* Remplacez par votre couleur de fond souhaitée */
-    box-sizing: border-box;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    text-transform: uppercase;
-}
-
-.btnFiltre.selected {
-    border: 1px solid #007bff; /* Remplacez par la couleur désirée pour le bouton sélectionné */
-}
-
-.btnFiltre.active {
-    border-radius: 8px 8px 0 0;
-    border: 1px solid #007bff; /* Remplacez par la couleur désirée pour le bouton actif */
-}
-
-.btnFiltre .chevron {
-    background-image: url(./assets/arrow-down.png);
-    height: 20px;
-    width: 20px;
-    transition: all 0.2s;
-}
-
-.btnFiltre .chevron.active {
-    transform: rotate(180deg);
-    transition: all 0.2s;
-}
-
-.filtreItems {
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.4, 1);
-    position: absolute;
-    z-index: 10;
-    background-color: white;
-    width: 100%;
-}
-
-.filtreItems.active {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 0 0 8px 8px;
-    padding-top: 50px;
-    cursor: pointer;
-    max-height: 500px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.4, 1);
-}
-
-.filtreItem {
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
-    color: #003366; /* Remplacez par votre couleur souhaitée */
-    margin: 0;
-    height: 42px;
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.filtreItem:hover {
-    background: #ffcccc; /* Remplacez par votre couleur désirée au survol */
-}
-
-.filtreItem:active {
-    background: #ff9999; /* Remplacez par votre couleur désirée lors de l'activation */
-}
-
-.filtreItem.selected {
-    background: #cc0000; /* Remplacez par votre couleur désirée pour l'élément sélectionné */
-    color: white;
-}
-
-.filtreContainer {
-    display: flex;
-    width: 80%;
-    gap: 36px;
-    margin-top: 80px;
-}
-
-.filtre {
-    position: relative;
-}
-
-.flexColumn {
-    max-width: 260px;
-    width: 100%;
-}
-
-.filtreTrier {
-    margin-left: auto;
-}
-
-.filtreTrier .btnFiltre.selected {
-    text-transform: none;
-}
-
-.CatalogueContainer {
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    justify-content: space-between;
-    gap: 20px;
-    margin-top: 80px;
-    margin-bottom: 40px;
-}
-
-.photo_block {
-    width: calc(50% - 10px);
-    aspect-ratio: 1.14;
-    overflow: hidden;
-}
-
-.photo_block:hover {
-    transform: scale(1.05);
-}
-
-.photo_block img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.btnContainer {
-    margin: 40px 0;
-}
-
-/* Responsive */
-
-@media (max-width: 768px) {
-    .filtreContainer {
-        flex-direction: column;
-        align-items: center;
-        width: 85%;
-        gap: 8px;
-        margin-top: 20px;
-    }
-
-    .filtre {
-        .filtreItems {
-            transition: none;
-        }
-
-        .filtreItems.active {
-            position: absolute;
-            padding-top: 0;
-            transition: none;
-        }
-    }
-
-    .filtreTrier {
-        margin-left: unset;
-    }
-
-    .flexColumn {
-        max-width: 100%;
-    }
-
-    .flexColumn .btnFiltre {
-        max-width: 100%;
-    }
-
-    .CatalogueContainer {
-        width: 90%;
-        margin-top: 20px;
-    }
-
-    .photo_block {
-        width: calc(100%);
-    }
-}
-
-/* Ajustements pour les sélecteurs avec flèche et étiquettes */
-.filter-area {
-    display: flex;
-    justify-content: space-between; /* Espace entre les éléments gauche et droite */
-    align-items: center; /* Aligne les filtres */
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.filter-area .filter-left {
-    display: flex;
-    gap: 20px; /* Espace entre les deux filtres */
-}
-
-.filter-area select {
-    position: relative; /* Ajout de cette propriété pour le positionnement de l'élément */
-    appearance: none; /* Supprimer l'apparence par défaut */
-    -webkit-appearance: none; /* Supprimer l'apparence par défaut pour WebKit */
-    -moz-appearance: none; /* Supprimer l'apparence par défaut pour Firefox */
-    border: 1px solid #ccc; /* Couleur de bord des sélecteurs */
-    padding: 10px 40px 10px 15px; /* Ajuster le padding pour le texte */
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    width: 100%; /* Prendre toute la largeur du conteneur */
-    background-image: url('./assets/arrow-down.png'); /* Utilisez le bon chemin */
-    background-repeat: no-repeat;
-    background-position: right 15px center; /* Positionnez l'image */
-    background-size: 10px; /* Ajustez la taille de l'image */
-}
-
-.filter-group {
-    width: 260px; /* Définit la largeur fixe pour chaque groupe de filtre */
-}
-
-/* État hover pour le conteneur */
-.filter-area select:hover {
-    border: 1px solid blue; /* Contour bleu lorsque l'on passe la souris */
-    border-radius: 8px 8px 0px 0px;
-}
-
-/* État actif lorsque le conteneur est sélectionné */
-.filter-area select.active {
-    border: 1px solid blue; /* Contour bleu lorsque le conteneur est cliqué */
-    border-radius: 8px 8px 0px 0px;
-
-}
-
-
-/* Ajustements sur mobile */
-@media screen and (max-width: 768px) {
-    .filter-area {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .filter-area .filter-left,
-    .filter-area .filter-right {
-        width: 100%;
-        justify-content: space-between;
-        margin-bottom: 15px;
-    }
-
-    .filter-area select {
-        width: 100%; /* Les sélecteurs prennent toute la largeur sur mobile */
-    }
-}
-
 
 /* photo*/
 .photo_detail {
@@ -970,6 +1124,11 @@ opacity: 0.5;}
 /*  **********************************  */
 
 @media screen and (max-width: 959px) {
+
+    body.photo-template-default.single.single-photo.postid-59.logged-in.admin-bar.no-customize-support {
+        width: 370px;
+    }
+
     .photo_detail {
         padding: 0;
     }
@@ -979,7 +1138,6 @@ opacity: 0.5;}
         flex-direction: column-reverse;
         padding: 0 20px;
         margin: -5px;
-        width: 100%;
         border-bottom: 1px solid #000;
     }
    
@@ -990,27 +1148,35 @@ opacity: 0.5;}
 
     .photo__info--description {
         padding-bottom: 10px;
+        margin-left: 50px;
         width: 90%;
         border-bottom: 0px solid #000;
     }
 
     .photo__info--image {
-        /* width: auto; */
+        display: flex;
         min-width: 265px;
+        margin-left: 40px;
+        align-items: center;
+        justify-content: center;
     }
     
     .photo__info--image .container--image {
         width: 100%;
-        /* width: auto; */
         height: 100%;
         max-height: 600px;
     }
 
     .photo_detail h1 {
-        font-size: 46px;
+        font-size: 40px;
         line-height: 48px;
-        padding: 30px 0;
         width: 100%;
+        margin-top: 10px;
+    }
+
+    .photo_detail h2 {
+        display: flex;
+        justify-content: center;
     }
 
     .photo_detail ul {
@@ -1018,9 +1184,11 @@ opacity: 0.5;}
     }
 
     .photo__contact{
+        display: flex !important;
         justify-items: center;
         text-align: center;
         justify-content: center;
+        flex-direction: column;
     }
 
     .photo__contact p {
@@ -1036,11 +1204,11 @@ opacity: 0.5;}
 
     .site__navigation {
         opacity: 0;
-        display: none;
+        display: none !important;
     }
 
     .photo__others {
-        padding: 30px 40px;
+        padding: 30px 6px;
     }
 
     .photo__others--images {

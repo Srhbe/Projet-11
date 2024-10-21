@@ -18,6 +18,7 @@ jQuery(document).ready(function ($) {
         var category = $('#category-filter').val(); // Filtre de catégorie
         var format = $('#format-filter').val(); // Filtre de format
         var order = $('#sort-filter').val(); // Filtre de tri (ordre)
+        
 
         // Log pour débogage
         console.log('Filtre catégorie:', category);
@@ -42,17 +43,15 @@ jQuery(document).ready(function ($) {
                         $('.photo-grid').html(''); // Vider le container avant de charger les nouvelles photos
                         reload = false; // Désactiver le flag de reload après le premier chargement
                     }
-
                     // Ajouter les nouvelles photos à la grille
                     $('.photo-grid').append(response.data);
-
+                   // applyLightbox();  // Pour activer le lightbox sur les nouvelles photos
                     // Vérifie s'il y a plus de photos à charger et ajuste le bouton "Charger plus"
                     if (response.has_more_posts) {
                         $('#load-more').show(); // Affiche le bouton si plus de photos sont disponibles
                     } else {
                         $('#load-more').text('Fin de publication').show(); // Change le texte en "Fin de publication"
                     }
-                    
                 } else {
                     // Si aucune photo n'a été trouvée
                     $('.photo-grid').html('<p>Aucune photo trouvée.</p>');
