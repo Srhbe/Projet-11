@@ -72,37 +72,7 @@ function load_more_photos() {
         ob_start(); // Commence la mise en tampon de sortie
         while ($photo_query->have_posts()) {
             $photo_query->the_post(); ?>
-            <div class="photo-item">
-                <?php if (has_post_thumbnail()) : ?>
-                    <?php the_post_thumbnail('large'); ?>
-                        <div class="overlay"> <!-- Overlay pour chaque photo -->
-                            <div class="overlay-title"><?php the_title(); ?></div>
-                            <div class="overlay-category">
-                                <?php
-                                    $categories = get_the_terms(get_the_ID(), 'categorie');
-                                    if (!empty($categories)) {
-                                        // Récupère le nom de la première catégorie
-                                        echo esc_html($categories[0]->name);
-                                    } else {
-                                        echo 'Sans catégorie'; // Affiche un message si aucune catégorie n'est assignée
-                                    }
-                                    ?>
-                            </div>
-                            <div class="fullscreen-background">
-                                <div class="fullscreen-icon">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/fullscreen.png" alt="Plein écran" />
-                                    </div>
-                                </div>
-                                <a href="<?php the_permalink(); ?>">
-                                    <div class="eye-icon">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/eye.png" alt="Voir" />
-                                    </div>
-                                </a>
-                                </div>
-                        </div>
-                <?php endif; ?>
-            </div>
-            
+            <?php get_template_part( 'templates-part/photo-item' ); ?>            
             <?php
         }
         $output = ob_get_clean(); // Récupère la sortie mise en tampon
@@ -208,11 +178,7 @@ function filter_photos() {
             // Ton HTML pour afficher les photos
             // Par exemple :
             ?>
-            <div class="photo-item">
-                <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                <div class="overlay-title"><?php the_title(); ?></div>
-                <div class="overlay-category"><?php echo get_the_term_list(get_the_ID(), 'categorie'); ?></div>
-            </div>
+            <?php get_template_part( 'templates-part/photo-item' ); ?>
             <?php
         endwhile;
         $data = ob_get_clean();

@@ -28,30 +28,7 @@ if ($categorie_terms && !is_wp_error($categorie_terms)) {
     if ($query->have_posts()) : ?>
         <div class="related-photos container-common flexrow">
             <?php while ($query->have_posts()) : $query->the_post(); ?>
-                <div class="photo-item brightness">
-                    <?php if (has_post_thumbnail()) : ?>
-                        <div class="thumbnail">
-
-                            <!-- Image de la photo -->
-                            <?php the_post_thumbnail('desktop-home'); ?>
-
-                            <!-- Icônes au survol -->
-                            <div class="overlay">
-                            <h3 class="overlay-title"><?php the_title(); ?></h3>
-                            <p class="overlay-category"><?php echo esc_html(get_the_terms(get_the_ID(), 'categorie')[0]->name); ?></p> <!-- Affichage de la catégorie -->
-                                <!-- Icône œil pour accéder à la page individuelle -->
-                                <a href="<?php the_permalink(); ?>" class="eye-icon" title="Voir les infos">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/eye.png" alt="Voir les infos">
-                                </a>
-
-                                <!-- Icône plein écran pour la lightbox -->
-                                <div class="fullscreen-icon" title="Voir en plein écran">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/fullscreen.png" alt="Plein écran">
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                </div>
+            <?php get_template_part( 'templates-part/photo-item' ); ?>
             <?php endwhile; ?>
         </div>
     <?php else : ?>
