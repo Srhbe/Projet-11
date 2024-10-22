@@ -36,7 +36,7 @@
                     'theme_location' => 'main-menu',
                     'container' => 'ul', // Supprime le conteneur div par défaut
                     'menu_class' => 'nav-menu' 
-                ));//pour tester le contact
+                ));
             ?>
         </nav>
     </div>

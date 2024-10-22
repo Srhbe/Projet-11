@@ -16,6 +16,12 @@ function motaphoto_enqueue_assets() {
     wp_localize_script('infinite-pagination', 'wp_data', array(
         'ajax_url' => admin_url('admin-ajax.php'), // URL pour AJAX
     ));
+
+    // Enqueue du script pour la modal contact
+    wp_enqueue_script('modal-contact', get_template_directory_uri() . '/js/modal-contact.js');
+
+    // Enqueue du script pour la modal contact
+    wp_enqueue_script('burger', get_template_directory_uri() . '/js/burger.js');
 }
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_assets');
 

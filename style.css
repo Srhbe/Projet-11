@@ -115,6 +115,7 @@ footer::before {
 .hero-thumbnail img {
     width: 1440px; /* S'assure que l'image prend toute la largeur */
     height: 962px; /* Conserve les proportions de l'image */
+    object-fit: cover;
 }
 
 .title-hero {
@@ -305,6 +306,17 @@ footer::before {
 .filter-group {
     width: 260px; /* Définit la largeur fixe pour chaque groupe de filtre */
 }
+/* Style spécifique pour les options du select */
+.filter-group select option {
+    background-color: rgb(255, 255, 255); /* Fond rouge pour les options déroulées */
+    color: rgb(0, 0, 0); /* Texte blanc pour les options */
+}
+
+.filter-group select option:hover {
+    background-color: rgb(255, 0, 0); /* Fond rouge pour les options déroulées */
+    color: rgb(255, 255, 255); /* Texte blanc pour les options */
+}
+
 
 /* État hover pour le conteneur */
 .filter-area select:hover {
@@ -316,7 +328,6 @@ footer::before {
 .filter-area select.active {
     border: 1px solid blue; /* Contour bleu lorsque le conteneur est cliqué */
     border-radius: 8px 8px 0px 0px;
-
 }
 
 
@@ -581,7 +592,7 @@ opacity: 0.5;}
 
 /* Positionner le logo à gauche et le burger à droite */
 header {
-    justify-content: space-between;
+    margin-bottom: 18px;
 }
 
 .logo {
@@ -724,7 +735,6 @@ header {
         flex-direction: column;
         padding: 20px;
         text-align: center;
-        background-color: #f1f1f1;
     }
 
     .footer-content {
@@ -1114,7 +1124,7 @@ div#wpcf7-f5-o1 {
 .photo__info--description,
 .photo__info--image {
     max-height: 890px;
-    width: 50%;
+    width: 80%;
 }
 
 .photo__info--image {
@@ -1136,7 +1146,6 @@ div#wpcf7-f5-o1 {
 }
 
 .photo__info--description ul {
-    padding-bottom: 30px;
     padding-left: 14px;
 }
 
@@ -1229,15 +1238,7 @@ div#wpcf7-f5-o1 {
 
 
 @media screen and (max-width: 768px) {
-
-    body.photo-template-default.single.single-photo.postid-59.logged-in.admin-bar.no-customize-support {
-        width: 370px;
-    }
-    body.home.blog.logged-in.admin-bar.no-customize-support {
-        width: 340px;
-    }
     
-
     .photo_detail {
         padding: 0;
     }
@@ -1250,11 +1251,6 @@ div#wpcf7-f5-o1 {
         border-bottom: 1px solid #000;
     }
    
-    .photo__info--description,
-    .photo__info--image {
-        margin: 0 auto;  
-    }
-
     .photo__info--description {
         padding-bottom: 10px;
         margin-left: 50px;
@@ -1279,7 +1275,7 @@ div#wpcf7-f5-o1 {
     .photo_detail h1 {
         font-size: 40px;
         line-height: 48px;
-        width: 100%;
+        width: 60%;
         margin-top: 10px;
     }
 
