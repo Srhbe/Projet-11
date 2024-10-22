@@ -1,14 +1,14 @@
-// lightbox.js
 'use strict';
 
-let images = []; // Liste globale des images
-let currentIndex = 0; // Index de l'image actuelle
-
 document.addEventListener('DOMContentLoaded', () => {
-    attachLightboxEvents(); // Attache les événements à la lightbox au chargement de la page
+    attachLightboxEvents();
+    // L'écouteur d'événements pour le chargement de nouvelles images ne devrait pas être ici,
+    // car on ne veut pas réinitialiser les événements chaque fois qu'une image est chargée.
 });
 
-// Fonction pour attacher les événements de la lightbox
+// Liste globale d'images
+const images = [];
+
 const attachLightboxEvents = () => {
     const lightbox = document.querySelector('.lightbox');
     const lightboxImage = lightbox.querySelector('.lightbox__image');
@@ -18,12 +18,67 @@ const attachLightboxEvents = () => {
     const prevBtn = lightbox.querySelector('.lightbox__arrows--previous');
     const nextBtn = lightbox.querySelector('.lightbox__arrows--next');
 
-    // Écouteurs pour les boutons de navigation
+    // Capture des images déjà présentes
+    document.querySelectorAll('.fullscreen-icon').forEach((trigger, index) => {
+        const fullImage = trigger.closest('.photo-item').querySelector('img').src;
+        const ref = trigger.closest('.photo-item').querySelector('.overlay-title').innerText;
+        const categorie = trigger.closest('.photo-item').querySelector('.overlay-category').innerText;
+
+        images.push({ fullImage, ref, categorie });
+
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            openLightbox(index);
+        });
+    });
+
+    let currentIndex = 0;
+
+    const openLightbox = (index) => {
+        if (index < 0 || index >= images.length) {
+            console.error(`Invalid index: ${index}`);
+            return;
+        }
+
+        currentIndex = index;
+        const image = images[currentIndex];
+
+        if (!image) {
+            console.error(`Image not found at index: ${currentIndex}`);
+            return;
+        }
+
+        lightboxImage.src = image.fullImage;
+        lightboxRef.innerText = image.ref;
+        lightboxCategorie.innerText = image.categorie;
+        lightbox.style.display = 'flex';
+        document.addEventListener('keydown', handleKeydown);
+    };
+
+    const changeImage = (direction) => {
+        const newIndex = (currentIndex + direction + images.length) % images.length;
+        openLightbox(newIndex);
+    };
+
+    const closeLightbox = () => {
+        lightbox.style.display = 'none';
+        document.removeEventListener('keydown', handleKeydown);
+    };
+
+    const handleKeydown = (e) => {
+        if (e.key === 'ArrowLeft') {
+            changeImage(-1);
+        } else if (e.key === 'ArrowRight') {
+            changeImage(1);
+        } else if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    };
+
     closeBtn.addEventListener('click', closeLightbox);
     prevBtn.addEventListener('click', () => changeImage(-1));
     nextBtn.addEventListener('click', () => changeImage(1));
 
-    // Écouteur pour fermer la lightbox quand on clique en dehors de l'image
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
             closeLightbox();
@@ -31,79 +86,26 @@ const attachLightboxEvents = () => {
     });
 };
 
-// Fonction pour ouvrir la lightbox
-const openLightbox = (index) => {
-    if (index < 0 || index >= images.length) {
-        console.error(`Invalid index: ${index}`);
-        return;
-    }
-
-    const image = images[index];
+// Fonction pour ajouter de nouvelles images
+const addImages = (newImages) => {
     const lightbox = document.querySelector('.lightbox');
     const lightboxImage = lightbox.querySelector('.lightbox__image');
     const lightboxRef = lightbox.querySelector('.lightbox__infos--Ref');
     const lightboxCategorie = lightbox.querySelector('.lightbox__infos--Categorie');
 
-    currentIndex = index; // Met à jour l'index courant
-
-    lightboxImage.src = image.fullImage;
-    lightboxRef.innerText = image.ref;
-    lightboxCategorie.innerText = image.categorie;
-    lightbox.style.display = 'flex';
-    document.addEventListener('keydown', handleKeydown);
-};
-
-// Fonction pour changer d'image
-const changeImage = (direction) => {
-    const newIndex = (currentIndex + direction + images.length) % images.length;
-    openLightbox(newIndex);
-};
-
-// Fonction pour fermer la lightbox
-const closeLightbox = () => {
-    const lightbox = document.querySelector('.lightbox');
-    lightbox.style.display = 'none';
-    document.removeEventListener('keydown', handleKeydown);
-};
-
-// Gérer les touches du clavier
-const handleKeydown = (e) => {
-    if (e.key === 'ArrowLeft') {
-        changeImage(-1);
-    } else if (e.key === 'ArrowRight') {
-        changeImage(1);
-    } else if (e.key === 'Escape') {
-        closeLightbox();
-    }
-};
-
-// Fonction pour ajouter de nouvelles images à la lightbox
-const addImagesToLightbox = (newImages) => {
-    images = [...images, ...newImages]; // Ajouter les nouvelles images à la liste globale
-    attachLightboxEventsToNewImages(newImages); // Attacher les événements à ces nouvelles images
-};
-
-// Attacher les événements à chaque nouvelle image
-const attachLightboxEventsToNewImages = (newImages) => {
-    const photoGrid = document.querySelector('.photo-grid');
-    
     newImages.forEach((image, index) => {
+        images.push(image);
         const trigger = document.createElement('div');
         trigger.classList.add('fullscreen-icon');
         trigger.innerHTML = `<img src="${image.fullImage}" alt="Image" />`;
 
-        // Ajout d'écouteur d'événement pour chaque nouvelle image
         trigger.addEventListener('click', (e) => {
             e.preventDefault();
-            openLightbox(images.length - newImages.length + index); // Ouvre l'image nouvellement ajoutée
+            openLightbox(images.length - 1); // Ouvrir la dernière image ajoutée
         });
 
-        // Ajoute le trigger à la grille d'images
-        photoGrid.appendChild(trigger);
+        // Ajoutez ce trigger à votre grille d'images, par exemple :
+        document.querySelector('.photo-grid').appendChild(trigger);
     });
+    console.log(trigger)
 };
-
-// Exposer la fonction d'ajout d'images à d'autres modules
-window.addImagesToLightbox = addImagesToLightbox;
-
-

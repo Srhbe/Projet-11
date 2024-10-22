@@ -22,7 +22,7 @@
                             <div class="overlay-category">
                             <?php
                                 $categories = (get_the_terms(get_the_ID(), 'categorie'));
-                                var_dump($categories); // Cela affichera toutes les catégories associées à la publication
+                                //var_dump($categories); // Cela affichera toutes les catégories associées à la publication
                                 
                                 if (!empty($categories)) {
                                     // Récupère le nom de la première catégorie

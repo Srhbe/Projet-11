@@ -1,14 +1,14 @@
 <?php 
 // Vérifier l'activation de ACF
 if ( !function_exists('get_field')) return;
-var_dump($post_id);
 $post_id = get_the_ID(); // Récupère l'ID du post actuel
 
 // Vérifier l'activation de ACF
 if ( !function_exists('get_field')) return;
 
 // Récupération des champs personnalisés via ACF
-$categorie  = get_field('categorie', $post_id);  // Champ ACF pour la catégorie
+$categorie  = get_the_terms($post_id, 'categorie');  // Champ ACF pour la catégorie
+//var_dump($categorie[0]->name);
 $formats = get_field('format', $post_id);         // Champ ACF pour le format
 $reference = get_field('reference', $post_id);       // Référence (champ ACF)
 $type = get_field('type', $post_id);                 // Type (champ ACF)
@@ -17,8 +17,8 @@ $annee = get_field('date', $post_id);               // Année (champ ACF)
 // Récupère les termes associés à la taxonomie 'format'
 $formats_terms = get_the_terms($post_id, 'format');  
 // Récupère les termes associés à la taxonomie 'categories'
-var_dump($categories_terms);
 $categorie_terms = get_the_terms($post_id, 'categorie');
+//var_dump($categories_terms);
 
 ?>
 
@@ -36,7 +36,7 @@ $categorie_terms = get_the_terms($post_id, 'categorie');
                 <li>Catégorie :
                     <?php 
                         if($categorie) {
-                            echo esc_html($categorie['name']); 
+                            echo esc_html($categorie[0]->name); 
                         } else {
                             echo 'Inconnue';
                         }

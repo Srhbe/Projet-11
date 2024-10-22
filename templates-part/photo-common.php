@@ -31,14 +31,14 @@ if ($categorie_terms && !is_wp_error($categorie_terms)) {
                 <div class="photo-item brightness">
                     <?php if (has_post_thumbnail()) : ?>
                         <div class="thumbnail">
-                            <h3 class="overlay-title"><?php the_title(); ?></h3>
-                            <p class="overlay-category"><?php echo esc_html(get_the_terms(get_the_ID(), 'categorie')[0]->name); ?></p> <!-- Affichage de la catégorie -->
 
                             <!-- Image de la photo -->
                             <?php the_post_thumbnail('desktop-home'); ?>
 
                             <!-- Icônes au survol -->
                             <div class="overlay">
+                            <h3 class="overlay-title"><?php the_title(); ?></h3>
+                            <p class="overlay-category"><?php echo esc_html(get_the_terms(get_the_ID(), 'categorie')[0]->name); ?></p> <!-- Affichage de la catégorie -->
                                 <!-- Icône œil pour accéder à la page individuelle -->
                                 <a href="<?php the_permalink(); ?>" class="eye-icon" title="Voir les infos">
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/eye.png" alt="Voir les infos">
