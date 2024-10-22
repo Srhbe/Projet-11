@@ -45,7 +45,10 @@ jQuery(document).ready(function ($) {
                     }
                     // Ajouter les nouvelles photos à la grille
                     $('.photo-grid').append(response.data);
-                   // applyLightbox();  // Pour activer le lightbox sur les nouvelles photos
+            
+                    // Attacher les événements Lightbox aux nouvelles images
+                    attachLightboxEvents();
+            
                     // Vérifie s'il y a plus de photos à charger et ajuste le bouton "Charger plus"
                     if (response.has_more_posts) {
                         $('#load-more').show(); // Affiche le bouton si plus de photos sont disponibles
@@ -58,6 +61,7 @@ jQuery(document).ready(function ($) {
                     $('#load-more').hide(); // Cache le bouton "Charger plus" si aucun résultat
                 }
             },
+            
             error: function (xhr, status, error) {
                 console.error('Erreur lors du chargement des photos :', error);
             }
@@ -88,5 +92,22 @@ jQuery(document).ready(function ($) {
         } else {
             $(this).siblings('label').css('opacity', '1'); // Montre le label si rien n'est sélectionné
         }
+    });
+});
+
+//burger
+document.addEventListener('DOMContentLoaded', function () {
+    const burgerIcon = document.getElementById('burger-icon');
+    const navMenu = document.querySelector('.nav-menu');
+
+    // Activer/désactiver le menu en cliquant sur l'icône burger
+    burgerIcon.addEventListener('click', function () {
+        navMenu.classList.toggle('active');
+        burgerIcon.classList.toggle('active'); // Active l'animation en croix
+    });
+    document.getElementById('burger-icon').addEventListener('click', function () {
+        this.classList.toggle('open');
+        document.querySelector('.main-menu').classList.toggle('open');
+        document.body.classList.toggle('header-open'); // Ajoute une classe au body pour garder le header blanc
     });
 });

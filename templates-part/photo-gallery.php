@@ -21,7 +21,7 @@
                             <div class="overlay-title"><?php the_title(); ?></div>
                             <div class="overlay-category">
                             <?php
-                                $categories = get_the_category();
+                                $categories = (get_the_terms(get_the_ID(), 'categorie'));
                                 var_dump($categories); // Cela affichera toutes les catégories associées à la publication
                                 
                                 if (!empty($categories)) {

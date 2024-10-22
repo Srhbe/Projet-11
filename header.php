@@ -22,6 +22,13 @@
             </a>
         </div>
 
+        <div class="menu-burger">
+            <div class="burger-icon" id="burger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
         <!-- Menu -->
         <nav class="main-menu">
             <?php

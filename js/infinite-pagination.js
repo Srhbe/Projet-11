@@ -63,29 +63,6 @@ jQuery(document).ready(function ($) {
 
 // modal contact
 
-document.addEventListener("DOMContentLoaded", function () {
-    const contactBtn = document.querySelector(".contact");
-    const modalOverlay = document.querySelector(".modal-overlay");
-    const modalContact = document.querySelector(".modal-contact");
-
-    // Ouverture de la modal au clic sur le lien "Contact"
-    contactBtn.addEventListener("click", function (e) {
-        e.preventDefault(); // Empêche l'action par défaut
-        console.log("Bouton de contact cliqué");
-        modalOverlay.classList.remove("hidden"); // Affiche l'overlay
-        modalContact.classList.add("open"); // Ajoute la classe 'open' pour afficher la modal
-        modalContact.classList.remove("modal-hidden"); // Enlève la classe qui cache la modal
-    });
-
-    // Fermeture de la modal au clic en dehors du formulaire
-    modalOverlay.addEventListener("click", function (e) {
-        if (e.target === modalOverlay) {
-            modalOverlay.classList.add("hidden"); // Cache l'overlay
-            modalContact.classList.remove("open"); // Enlève la classe 'open'
-            modalContact.classList.add("modal-hidden"); // Ajoute la classe pour cacher la modal
-        }
-    });
-});
 
 //modal contact photo
 document.addEventListener("DOMContentLoaded", function () {
@@ -113,35 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Aucune référence trouvée !");
             }
         });
-    });
-});
-
-
-
-// contact single photo
-jQuery(document).ready(function ($) {
-    // Initialisation des événements de la lightbox
-    attachLightboxEvents();
-
-    // Gestion de la modal contact
-    $('.contact').on('click', function (e) {
-        e.preventDefault(); // Empêche l'action par défaut
-        console.log("Bouton de contact cliqué");
-
-        const modalOverlay = $('.modal-overlay');
-        const modalContact = $('.modal-contact');
-
-        modalOverlay.removeClass("hidden"); // Affiche l'overlay
-        modalContact.addClass("open"); // Ajoute la classe 'open' pour afficher la modal
-        modalContact.removeClass("modal-hidden"); // Enlève la classe qui cache la modal
-    });
-
-    // Fermeture de la modal au clic en dehors du formulaire
-    $('.modal-overlay').on('click', function (e) {
-        if (e.target === this) {
-            $(this).addClass("hidden"); // Cache l'overlay
-            $('.modal-contact').removeClass("open").addClass("modal-hidden"); // Cache la modal
-        }
     });
 });
 

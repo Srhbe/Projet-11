@@ -79,7 +79,7 @@ function load_more_photos() {
                             <div class="overlay-title"><?php the_title(); ?></div>
                             <div class="overlay-category">
                                 <?php
-                                    $categories = get_the_category();
+                                    $categories = get_the_terms(get_the_ID(), 'categorie');
                                     if (!empty($categories)) {
                                         // Récupère le nom de la première catégorie
                                         echo esc_html($categories[0]->name);
@@ -211,7 +211,7 @@ function filter_photos() {
             <div class="photo-item">
                 <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
                 <div class="overlay-title"><?php the_title(); ?></div>
-                <div class="overlay-category"><?php echo get_the_term_list(get_the_ID(), 'category'); ?></div>
+                <div class="overlay-category"><?php echo get_the_term_list(get_the_ID(), 'categorie'); ?></div>
             </div>
             <?php
         endwhile;
