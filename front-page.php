@@ -10,5 +10,4 @@
 <?php get_template_part( 'templates-part/photo-gallery' ); ?>
 </div>
 
-
 <?php get_footer(); ?>

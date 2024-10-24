@@ -1,22 +1,22 @@
 <?php
 // Récupération de la catégorie de la photo courante
-$categorie_terms = get_the_terms(get_the_ID(), 'categorie'); // Utilisez 'categorie' comme slug de la taxonomie
+$categorie_terms = get_the_terms(get_the_ID(), 'categorie'); 
 
-// Vérifiez si des termes sont retournés
+// Vérification si des termes sont retournés
 if ($categorie_terms && !is_wp_error($categorie_terms)) {
-    // Récupérer l'ID du premier terme (si plusieurs termes sont associés, choisissez celui qui vous intéresse)
-    $categorie_id = $categorie_terms[0]->term_id; // Ou utilisez un autre indice si vous avez besoin d'un terme spécifique
+    // Récupérer l'ID du premier terme
+    $categorie_id = $categorie_terms[0]->term_id; 
 
     // Arguments de la requête pour récupérer les photos de la même catégorie
     $custom_args = array(
-        'post_type' => 'photo', // Assurez-vous que c'est le bon post type
+        'post_type' => 'photo', 
         'posts_per_page' => 2,
         'post__not_in' => array(get_the_ID()), // Exclut la photo courante
         'tax_query' => array(
             array(
-                'taxonomy' => 'categorie', // Nom de la taxonomy
-                'field'    => 'term_id',   // Utilisez 'term_id' pour faire correspondre avec l'ID
-                'terms'    => array($categorie_id), // Utiliser un tableau pour le terme
+                'taxonomy' => 'categorie',
+                'field'    => 'term_id',   
+                'terms'    => array($categorie_id), //tableau pour le terme
             )
         ),
     );

@@ -21,7 +21,6 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/logo.png" alt="Logo du site">
             </a>
         </div>
-
         <div class="menu-burger">
             <div class="burger-icon" id="burger-icon">
                 <span></span>
